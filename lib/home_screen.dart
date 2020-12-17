@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grupp_8/PictureView.dart';
 import 'package:grupp_8/api.dart';
 import 'aboutUs_screen.dart';
 import 'api.dart';
@@ -30,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: _photoListView(),
                   height: 400,
                   width: double.infinity,
+                  
                 )
               ],
             ),
@@ -122,14 +124,41 @@ class _HomeScreenState extends State<HomeScreen> {
     return ListView.builder(
       itemCount: list == null ? 0 : list.length,
       itemBuilder: (context, index) {
-        return Image.network(
-          list[index].photoUrl,
-          fit: BoxFit.cover,
-        );
-      },
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(context, 
+            MaterialPageRoute(
+              builder: (context) => (PictureView()))
+            );
+          },
+          
+        
+          child: Card(
+            child: Column(
+              children: <Widget>[
+                Image.network(
+                  list[index].photoUrl,
+                  fit: BoxFit.cover)
+              ],
+            )
+          )
+          );
+      }
     );
   }
-}
+
+//   Widget _listViewBuilder(List<Photo> list) {
+//     return ListView.builder(
+//       itemCount: list == null ? 0 : list.length,
+//       itemBuilder: (context, index) {
+//         return Image.network(
+//           list[index].photoUrl,
+//           fit: BoxFit.cover,
+//         );
+//       },
+//     );
+//   }
+// }
 
 Widget _searchImageTextField() {
   return Container(
@@ -158,11 +187,11 @@ Widget _searchImageTextField() {
 //         .map(
 //           (item) => GestureDetector(
 //             onTap: () {
-//               Navigator.push(
-//                 context,
-//                 MaterialPageRoute(
-//                     builder: (context) =>
-//                         (PictureView())), // Visar enbart en bild nu, som är förvald
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //       builder: (context) =>
+              //           (PictureView())), // Visar enbart en bild nu, som är förvald
 //               );
 //               print('You have pressed a picture');
 //             },
@@ -193,3 +222,4 @@ Widget _searchImageTextField() {
 //         .toList(),
 //   );
 // }
+}
